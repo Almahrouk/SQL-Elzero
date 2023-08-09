@@ -1,0 +1,80 @@
+Foreign Key – One To One
+
+/* Create Table cards */
+CREATE TABLE cards (
+    card_id INT NOT NULL,
+    card_num varchar(255),
+    client_id INT NOT NULL,
+    PRIMARY KEY(card_id),
+    FOREIGN KEY(client_id) REFERENCES clients(id)
+) ENGINE = INNODB;
+
+-----------------------------------------------------------
+
+One To Many:
+/* Create Table orders*/
+CREATE TABLE orders (
+    order_id INT NOT NULL,
+    price varchar(255),
+    client_id INT,
+    PRIMARY KEY(order_id),
+    FOREIGN KEY(client_id) REFERENCES clients(id)
+) ENGINE = INNODB;
+
+/* Create Table comments*/
+CREATE TABLE comments (
+    c_id INT NOT NULL,
+    comment varchar(255),
+    client_id INT,
+    PRIMARY KEY(c_id),
+    FOREIGN KEY(client_id) REFERENCES clients(id)
+) ENGINE = INNODB;
+
+
+-----------------------------------------------------------
+
+Many To Many:
+/* Create Table shops*/
+CREATE TABLE shops (
+	shop_id INT NOT NULL PRIMARY KEY,
+    name varchar(255)
+) ENGINE = INNODB;
+
+/* Create Table shop_members */
+CREATE TABLE shop_members (
+	client INT NOT NULL,
+    shop INT NOT NULL,
+    PRIMARY KEY(client, shop),
+    CONSTRAINT cons_clients
+    	FOREIGN KEY (client) REFERENCES clients (id)
+    	ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT cons_shop
+    	FOREIGN KEY (shop) REFERENCES shops (shop_id)
+    	ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = INNODB;
+
+/* Select From Clients And Join Shop Members */
+SELECT
+	*
+FROM
+	clients
+JOIN
+	shopmember
+ON
+	clients.id = shopmember.client
+WHERE
+	shopmember.shop = 1;
+
+/* Select From Shops And Join Shop Members */
+SELECT
+	*
+FROM
+	shops
+JOIN
+	shopmember
+ON
+	shops.shop_id = shopmember.shop
+WHERE
+	shopmember.client = 1;
+
+-----------------------------------------------------------

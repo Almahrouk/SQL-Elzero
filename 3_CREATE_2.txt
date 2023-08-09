@@ -1,0 +1,56 @@
+/* Create Database elzero */
+CREATE DATABASE elzero;
+
+/* Show All Databases */
+SHOW DATABASES;
+
+/* Switch To This Database */
+USE elzero;
+
+/* Show Databases Like elzero */
+SHOW DATABASES LIKE 'elzero';
+
+----------------------------------------------------
+----------------------------------------------------
+
+
+/* Create Table With 3 Fields */
+Create TABLE students (
+  id int(11),
+  name varchar(255),
+  email varchar(255)
+);
+
+
+
+
+
+
+/* Show Columns Inside Table */
+
+DESCRIBE students; # Shortcut For => SHOW COLUMNS FROM table_name;
+
+DESC students; # Short For DESCRIBE
+
+EXPLAIN students; # Same As Describe
+
+SHOW COLUMNS FROM students; # Same As Previous Results
+
+SHOW FIELDS FROM students; # Same As Previous Results
+
+/* Show The Status Of The Tables */
+
+SHOW TABLE STATUS;
+
+
+
+----------------------------------------------------
+----------------------------------------------------
+
+
+/* Rename Multiple Tables */
+RENAME TABLE s1 TO new1, s2 TO new2;
+
+/* Change Table Engine */
+ALTER TABLE new1 ENGINE = MYISAM;
+

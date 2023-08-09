@@ -1,0 +1,38 @@
+1) Create Database:
+Create Database database_name ;
+
+2) Login into database:
+USE database_name ;
+
+3) 
+
++++++ -----------------------  ++++++  ---------------------
+
+/* Create Database osama Without Check */
+CREATE DATABASE osama;
+
+/* Create Database osama If Its Not Exists */
+CREATE DATABASE IF NOT EXISTS osama;
+
+/* Delete Database osama Without Check */
+DROP DATABASE osama;
+
+/* Delete Database osama If Its Exists */
+DROP DATABASE IF EXISTS osama;
+
+/* Test Syntax For Multiple Line Query */
+SELECT
+	name, email, info
+FROM
+	osama
+WHERE
+	id = 100
+AND
+	xx = "zz"
+ORDER BY
+	id
+LIMIT
+	1
+
+/* Select All Records From Items Table */
+SELECT * FROM `items`;

@@ -1,0 +1,166 @@
+/* Add New Password Field */
+ALTER TABLE students ADD password varchar(255);
+
+/* Add Username Field After name Field */
+ALTER TABLE students ADD username varchar(255) AFTER name;
+
+==================================
+==== MYSQL Database [ ALTER ] ====
+==================================
+
++-----+
+| ADD |  (1)
++-----+
+1] ALTER TABLE "table_name" ADD "column_name" datatype(length) ; >> ALTER TABLE students ADD test varchar(255) FIRST;
+
+2] ADD As First: >>> ALTER TABLE table_name ADD column_name datatype(length) FIRST;
+
+3] ADD As LAST: >>> ALTER TABLE table_name ADD column_name datatype(length); (Defulte)
+
+4] ADD AFTER :  >>> ALTER TABLE table_name ADD column_name datatype(length) AFTER column_name2;
+
+5] ADD BEFORE :  >>> ALTER TABLE table_name ADD column_name datatype(length) BEFORE column_name2;
+
+
+
+
+
++--------+
+| CHANGE |  (2)
++--------+
+/* Change Field Location And Type */
+ALTER TABLE students CHANGE username username varchar(255) AFTER email;
+
+/* Change Field Type */
+ALTER TABLE students CHANGE test test char(50);
+
+*] ALTER TABLE "table_name" CHANGE "column_name" "column_name" datatype(length) FIRST; 
+
+
+
+mysql> SHOW COLUMNS FROM students;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| password | varchar(255) | YES  |     | NULL    |       |
+| id       | int(11)      | YES  |     | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| email    | varchar(255) | YES  |     | NULL    |       |
+| username | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+
+mysql> ALTER TABLE students CHANGE id id INT(11) FIRST;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM students;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int(11)      | YES  |     | NULL    |       |
+| password | varchar(255) | YES  |     | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| email    | varchar(255) | YES  |     | NULL    |       |
+| username | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> ALTER TABLE students CHANGE username username  varchar(255) AFTER id;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM students;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int(11)      | YES  |     | NULL    |       |
+| username | varchar(255) | YES  |     | NULL    |       |
+| password | varchar(255) | YES  |     | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| email    | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql>
+
+------------------------------------------------------------------------- END 
+
+
+/* Delete Field last */
+ALTER TABLE student DROP last;
+
+
+
+/* Modify Field Type */
+ALTER TABLE students MODIFY test varchar(255);
+
+
+
+
+---------------------------------------------------------------- More:
+
+/* Change Table Name */
+ALTER TABLE new1 RENAME osama;
+
+EX:
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| elzero             |
+| information_schema |
+| management         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| product            |
+| test               |
+| test00             |
+| test1              |
+| using_sql          |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> USE elzero;
+Database changed
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_elzero |
++------------------+
+| new1             |
+| new2             |
+| students         |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE new1 RENAME osama;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>  SHOW TABLES;
++------------------+
+| Tables_in_elzero |
++------------------+
+| new2             |
+| osama            |
+| students         |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+---------------------------------------------------- END 
+
+/* Change Many Fields Name And Type */
+ALTER TABLE students MODIFY username char(50), CHANGE id userid int(11);
+
+/* Change Many Fields Name And Type */
+ALTER TABLE students MODIFY username varchar(255), CHANGE userid id tinyint(1);
+
+/* Change Character Set UTF-8 */
+ALTER TABLE students CONVERT TO CHARACTER SET utf8;
+
+/* Change Character Set Latin 1 */
+ALTER TABLE students CONVERT TO CHARACTER SET latin1;

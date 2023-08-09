@@ -1,0 +1,131 @@
+video 45: Information Functions
+
+
+/*
+  Information Functions
+*/
+
+SELECT USER();
+SELECT SESSION_USER();
+SELECT SYSTEM_USER();
+
+SELECT VERSION(); >>> [الاصدار ]
+
+SELECT CHARSET(USER());  >>> [الترميز]
+SELECT CHARSET(CONVERT(USER() USING latin1));
+SELECT CHARSET(CONVERT(USER() USING latin1)) converted;
+
+SELECT DATABASE();
+
+SELECT CONNECTION_ID(); >>> [for Network & Server]
+				    [Every Connection With DataBase Have a specitcal uniqe ID]
+
+
+
+
+
+
+
+EX:
+
+
+mysql> SELECT USER();
++--------+
+| USER() |
++--------+
+| root@  |
++--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SESSION_USER();
++----------------+
+| SESSION_USER() |
++----------------+
+| root@          |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SYSTEM_USER();
++---------------+
+| SYSTEM_USER() |
++---------------+
+| root@         |
++---------------+
+1 row in set (0.00 sec)
+
+
+===========================================
+
+
+mysql> SELECT VERSION();
++-----------------+
+| VERSION()       |
++-----------------+
+| 10.4.27-MariaDB |
++-----------------+
+1 row in set (0.00 sec)
+
+
+
+============================================
+
+
+mysql> SELECT CHARSET(USER());
++-----------------+
+| CHARSET(USER()) |
++-----------------+
+| utf8            |
++-----------------+
+1 row in set (0.05 sec)
+
+
+mysql> SELECT CHARSET(CONVERT(USER() USING latin1));
++---------------------------------------+
+| CHARSET(CONVERT(USER() USING latin1)) |
++---------------------------------------+
+| latin1                                |
++---------------------------------------+
+1 row in set (0.05 sec)
+
+
+mysql> SELECT CHARSET(CONVERT(USER() USING latin1)) converted;
++-----------+
+| converted |
++-----------+
+| latin1    |
++-----------+
+1 row in set (0.00 sec)
+
+
+
+========================================================
+
+
+
+mysql> SELECT DATABASE();
++------------+
+| DATABASE() |
++------------+
+| elzero     |
++------------+
+1 row in set (0.00 sec)
+
+
+
+========================================================
+
+mysql> SELECT CONNECTION_ID();
++-----------------+
+| CONNECTION_ID() |
++-----------------+
+|              50 |
++-----------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+

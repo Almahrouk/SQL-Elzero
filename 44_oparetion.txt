@@ -1,0 +1,166 @@
+video 44: Arithmetic Operators
+
+
+
+
+
+
+
+
+
+/*
+  Arithmetic Operators
+*/
+
+SELECT (2 *  2) + 100;
+
+SELECT 20 / 2;
+
+SELECT 20 DIV 2;
+
+SELECT 21 % 2;
+
+SELECT name, days AS DaysOfWork, dayrate AS DayRate FROM `try`;
+
+SELECT name, days AS DaysOfWork, dayrate AS DayRate, days * dayrate AS NeededMoney FROM `try`;
+
+SELECT name, days AS DaysOfWork, dayrate AS DayRate, (days * dayrate) + 100 AS NeededMoney FROM `try`;
+
+SELECT
+  name,
+  days AS DaysOfWork,
+  dayrate AS DayRate,
+  (days * dayrate) AS NeededMoney,
+  (days * dayrate) + 100 AS NeededMoneyWithBonus
+FROM
+  `try`
+
+SELECT
+  name,
+  days AS DaysOfWork,
+  dayrate AS DayRate,
+  (days * dayrate) AS NeededMoney,
+  (days * dayrate) + 100 AS NeededMoneyWithBonus,
+  (days * dayrate) + 100 - 50 AS ResultMoneyWithOfficeBoyMoney
+FROM
+  `try`
+
+
+
+
+================================================
+------------------------------------------------
+================================================
+
+
+
+
+EX:
+
+
+mysql> SELECT 2*2 ;
++-----+
+| 2*2 |
++-----+
+|   4 |
++-----+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT (2 *  2) + 100;
++----------------+
+| (2 *  2) + 100 |
++----------------+
+|            104 |
++----------------+
+1 row in set (0.00 sec)
+
+-------------------------------------------
+
+mysql> SELECT 20/2;
++---------+
+| 20/2    |
++---------+
+| 10.0000 |
++---------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT ROUND(20/2);
++-------------+
+| ROUND(20/2) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT 20 DIV 2;
++----------+
+| 20 DIV 2 |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
+
+--------------------------------------------
+
+mysql> SELECT 20 % 2 ;
++--------+
+| 20 % 2 |
++--------+
+|      0 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 21 % 2 ;
++--------+
+| 21 % 2 |
++--------+
+|      1 |
++--------+
+1 row in set (0.00 sec)
+
+
+----------------------------------------------
+==============================================
+----------------------------------------------
+
+
+mysql> SELECT name, days AS DaysOfWork, dayssalary AS DayRate FROM `new2`;
++----------+------------+---------+
+| name     | DaysOfWork | DayRate |
++----------+------------+---------+
+| Mohammed |         13 |      40 |
+| Akram    |          8 |      35 |
+| Dana     |         22 |      40 |
+| Obada    |         23 |      39 |
++----------+------------+---------+
+4 rows in set (0.00 sec)
+
+
+mysql>  SELECT name, days AS DaysOfWork, dayssalary AS DayRate, days *  dayssalary AS Total FROM `new2`;
++----------+------------+---------+-------+
+| name     | DaysOfWork | DayRate | Total |
++----------+------------+---------+-------+
+| Mohammed |         13 |      40 |   520 |
+| Akram    |          8 |      35 |   280 |
+| Dana     |         22 |      40 |   880 |
+| Obada    |         23 |      39 |   897 |
++----------+------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT name, days AS DaysOfWork, dayssalary AS DayRate, (days *  dayssalary) + 100 AS Total FROM `new2`;
++----------+------------+---------+-------+
+| name     | DaysOfWork | DayRate | Total |
++----------+------------+---------+-------+
+| Mohammed |         13 |      40 |   620 |
+| Akram    |          8 |      35 |   380 |
+| Dana     |         22 |      40 |   980 |
+| Obada    |         23 |      39 |   997 |
++----------+------------+---------+-------+
+4 rows in set (0.00 sec)
+
+
+
+

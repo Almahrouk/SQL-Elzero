@@ -1,0 +1,144 @@
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| elzero             |
+| information_schema |
+| management         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| product            |
+| test               |
+| test00             |
+| test1              |
+| using_sql          |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> USE elzero;
+Database changed
+
+mysql> ALTER TABLE students ADD username varchar(255) ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE students ADD password varchar(255) FIRST ;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE students ADD s3 varchar(255) AFTER name ;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+-----------------------------
+
+
+*] ALTER TABLE "table_name" CHANGE "column_name" "column_name" datatype(length) FIRST; 
+
+
+
+mysql> SHOW COLUMNS FROM students;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| password | varchar(255) | YES  |     | NULL    |       |
+| id       | int(11)      | YES  |     | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| email    | varchar(255) | YES  |     | NULL    |       |
+| username | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+
+mysql> ALTER TABLE students CHANGE id id INT(11) FIRST;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM students;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int(11)      | YES  |     | NULL    |       |
+| password | varchar(255) | YES  |     | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| email    | varchar(255) | YES  |     | NULL    |       |
+| username | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> ALTER TABLE students CHANGE username username  varchar(255) AFTER id;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM students;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int(11)      | YES  |     | NULL    |       |
+| username | varchar(255) | YES  |     | NULL    |       |
+| password | varchar(255) | YES  |     | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| email    | varchar(255) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql>
+-------------------------------
+
+
+
+
+
+/* Change Table Name */
+ALTER TABLE new1 RENAME osama;
+
+EX:
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| elzero             |
+| information_schema |
+| management         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| product            |
+| test               |
+| test00             |
+| test1              |
+| using_sql          |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> USE elzero;
+Database changed
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_elzero |
++------------------+
+| new1             |
+| new2             |
+| students         |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE new1 RENAME osama;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>  SHOW TABLES;
++------------------+
+| Tables_in_elzero |
++------------------+
+| new2             |
+| osama            |
+| students         |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+---------------------------------------------------- END 

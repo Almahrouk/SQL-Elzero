@@ -1,0 +1,109 @@
+Microsoft Windows [Version 10.0.22621.963]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\almah>mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 140
+Server version: 5.5.5-10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE elzero;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| elzero             |
+| information_schema |
+| management         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| product            |
+| test               |
+| test00             |
+| test1              |
+| using_sql          |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> USE elzero;
+Database changed
+mysql> Create TABLE students (
+    ->   id int(11),
+    ->   name varchar(255),
+    ->   email varchar(255)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int(11)      | YES  |     | NULL    |       |
+| name  | varchar(255) | YES  |     | NULL    |       |
+| email | varchar(255) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> DESC students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int(11)      | YES  |     | NULL    |       |
+| name  | varchar(255) | YES  |     | NULL    |       |
+| email | varchar(255) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> EXPLAIN students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int(11)      | YES  |     | NULL    |       |
+| name  | varchar(255) | YES  |     | NULL    |       |
+| email | varchar(255) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> SHOW COLUMNS FROM students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int(11)      | YES  |     | NULL    |       |
+| name  | varchar(255) | YES  |     | NULL    |       |
+| email | varchar(255) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> SHOW FIELDS FROM students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int(11)      | YES  |     | NULL    |       |
+| name  | varchar(255) | YES  |     | NULL    |       |
+| email | varchar(255) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> SHOW TABLE STATUS;
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| Name     | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation          | Checksum | Create_options | Comment | Max_index_length | Temporary |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| students | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |           NULL | 2023-01-04 16:29:19 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                  |           |
+|          |                0 | N          |      |                |             |                 |              |           |                |                     |             |            |                    |          |                |         |                  |           |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> Create TABLE students (
+    ->   id int(11));
+ERROR 1050 (42S01): Table 'students' already exists
+mysql>

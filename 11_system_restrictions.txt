@@ -1,0 +1,19 @@
+11_system_restrictions 
+1] NOT NULL
+2] NULL
+3] UNIQUE
+
+
+1,2- ALTER TABLE students CHANGE username username VARCHAR(255) NOT NULL;
+3- ALTER TABLE students ADD UNIQUE(username);
+
+
+
+/* Make Username Unique */
+ALTER TABLE students ADD UNIQUE(username);
+
+/* Drop Index For osama */
+ALTER TABLE students DROP INDEX osama;
+
+/* Add test Field Not Null And Unique */
+ALTER TABLE students ADD test varchar(255) NOT NULL UNIQUE;

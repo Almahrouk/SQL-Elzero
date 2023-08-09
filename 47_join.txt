@@ -1,0 +1,438 @@
+Video: 47   Simulation Of Join
+==============================
+==============================
+==============================
+Video: 48   Aliases In Deep
+==============================
+==============================
+==============================
+Video: 49   Inner Join
+==============================
+==============================
+==============================
+Video: 50   Left And Right Join
+
+
+
+
+/*
+  Simulation Of Join
+*/
+
+CREATE TABLE (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  user_name varchar(255),
+  lang_id INT NOT NULL,
+  PRIMARY KEY (user_id),
+  FOREIGN KEY (lang_id) REFERENCES langs(lang_id)
+) ENGINE = INNODB;
+
+SELECT * FROM `users`, `langs`;
+
+SELECT * FROM `users`, `langs` WHERE users.lang_id = langs.lang_id;
+
+
+EX:
+
+mysql> SELECT * FROM `users`, `langs` WHERE users.lang_id = langs.lang_id;
++---------+---------------+---------+---------+------------+
+| user_id | user_name     | lang_id | lang_id | lang_name  |
++---------+---------------+---------+---------+------------+
+|       1 | Dana          |       1 |       1 | Python     |
+|       2 | Mohammed      |       2 |       2 | C++        |
+|       3 | Akram         |       6 |       6 | Java       |
+|       4 | Obada         |       1 |       1 | Python     |
+|       5 | Abd-Al-Rahman |       7 |       7 | C#         |
+|       6 | Ahmad         |       1 |       1 | Python     |
+|       7 | Noor          |       6 |       6 | Java       |
+|       8 | Lina          |       7 |       7 | C#         |
+|       9 | Sara          |       3 |       3 | Javascript |
+|      10 | Rana          |       2 |       2 | C++        |
++---------+---------------+---------+---------+------------+
+10 rows in set (0.03 sec)
+
+
+
+
+
+
+=======================================================================================
+=======================================================================================
+=======================================================================================
+Video: 48   Aliases In Deep
+
+ [ Table_Name.Column_Name ]
+
+/*
+  Aliases In Deep
+*/
+
+SELECT
+  users.lang_id
+FROM
+  `users`, `langs`
+WHERE
+  users.lang_id = langs.lang_id;
+
+SELECT
+  users.user_id
+FROM
+  `users`, `langs`
+WHERE
+  users.lang_id = langs.lang_id;
+
+SELECT
+  users.user_id,
+  users.user_name,
+  langs.lang_name
+FROM
+  `users`, `langs`
+WHERE
+  users.lang_id = langs.lang_id;
+
+SELECT
+  u.user_id User_Id,
+  u.user_name Username,
+  l.lang_name Fav_Lang
+FROM
+  `users` u,
+  `langs` l
+WHERE
+  u.lang_id = l.lang_id;
+
+SELECT
+  u.user_id,
+  u.user_name,
+  l.lang_name
+FROM
+  `users` u,
+  `langs` l
+WHERE
+  u.lang_id = l.lang_id;
+
+
+
+Ex:
+
+mysql> SELECT user_name, users.lang_id, lang_name FROM `users`, `langs` WHERE users.lang_id = langs.lang_id;
++---------------+---------+------------+
+| user_name     | lang_id | lang_name  |
++---------------+---------+------------+
+| Dana          |       1 | Python     |
+| Mohammed      |       2 | C++        |
+| Akram         |       6 | Java       |
+| Obada         |       1 | Python     |
+| Abd-Al-Rahman |       7 | C#         |
+| Ahmad         |       1 | Python     |
+| Noor          |       6 | Java       |
+| Lina          |       7 | C#         |
+| Sara          |       3 | Javascript |
+| Rana          |       2 | C++        |
++---------------+---------+------------+
+10 rows in set (0.00 sec)
+
+
+mysql> SELECT users.user_name, users.lang_id, langs.lang_name FROM users, langs WHERE users.lang_id = langs.lang_id;
++---------------+---------+------------+
+| user_name     | lang_id | lang_name  |
++---------------+---------+------------+
+| Dana          |       1 | Python     |
+| Mohammed      |       2 | C++        |
+| Akram         |       6 | Java       |
+| Obada         |       1 | Python     |
+| Abd-Al-Rahman |       7 | C#         |
+| Ahmad         |       1 | Python     |
+| Noor          |       6 | Java       |
+| Lina          |       7 | C#         |
+| Sara          |       3 | Javascript |
+| Rana          |       2 | C++        |
++---------------+---------+------------+
+10 rows in set (0.00 sec)
+
+
+========================= Using Aliases [ . ] [ AS ]
+
+mysql> SELECT u.user_name AS Name, u.lang_id AS ID, l.lang_name AS Language FROM users u, langs l WHERE u.lang_id = l.lang_id;
++---------------+----+------------+
+| Name          | ID | Language   |
++---------------+----+------------+
+| Dana          |  1 | Python     |
+| Mohammed      |  2 | C++        |
+| Akram         |  6 | Java       |
+| Obada         |  1 | Python     |
+| Abd-Al-Rahman |  7 | C#         |
+| Ahmad         |  1 | Python     |
+| Noor          |  6 | Java       |
+| Lina          |  7 | C#         |
+| Sara          |  3 | Javascript |
+| Rana          |  2 | C++        |
++---------------+----+------------+
+10 rows in set (0.00 sec)
+
+
+
+=======================================================================================
+=======================================================================================
+=======================================================================================
+Video: 49   Inner Join
+
+
+
+
+/*
+  Inner Join
+*/
+
+SELECT
+  u.user_id,
+  u.user_name,
+  l.lang_name
+FROM
+  `users` u
+INNER JOIN
+  `langs` l
+ON
+  u.lang_id = l.lang_id;
+
+
+
+EX:
+SELECT 
+	u.user_name AS Name, 
+	u.lang_id AS ID, 
+	l.lang_name AS Language 
+FROM 
+	users u 
+INNER JOIN 
+	langs l 
+ON 
+	u.lang_id = l.lang_id;
+
+OR: >>>
+
+mysql>  SELECT u.user_name AS Name, u.lang_id AS ID, l.lang_name AS Language FROM users u INNER JOIN langs l ON u.lang_id = l.lang_id;
++---------------+----+------------+
+| Name          | ID | Language   |
++---------------+----+------------+
+| Dana          |  1 | Python     |
+| Mohammed      |  2 | C++        |
+| Akram         |  6 | Java       |
+| Obada         |  1 | Python     |
+| Abd-Al-Rahman |  7 | C#         |
+| Ahmad         |  1 | Python     |
+| Noor          |  6 | Java       |
+| Lina          |  7 | C#         |
+| Sara          |  3 | Javascript |
+| Rana          |  2 | C++        |
++---------------+----+------------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+
+
+=======================================================================================
+=======================================================================================
+=======================================================================================
+Video: 50   Left And Right Join
+
+
+
+/*
+  Left And Right Join
+*/
+
+SELECT
+  u.user_id,
+  u.user_name,
+  l.lang_name
+FROM
+  `users` u
+INNER JOIN
+  `langs` l
+ON
+  u.lang_id = l.lang_id;
+
+SELECT
+  u.user_id,
+  u.user_name,
+  l.lang_name
+FROM
+  `users` u
+LEFT JOIN
+  `langs` l
+ON
+  u.lang_id = l.lang_id;
+
+SELECT
+  u.user_id,
+  u.user_name,
+  l.lang_name
+FROM
+  `users` u
+RIGHT JOIN
+  `langs` l
+ON
+  u.lang_id = l.lang_id;
+
+SELECT
+  l.lang_name,
+  COUNT(l.lang_id) How_Much_Used
+FROM
+  `users` u
+INNER JOIN
+  `langs` l
+ON
+  u.lang_id = l.lang_id;
+GROUP BY
+  l.lang_id
+
+
+
+
+
+
+EX:
+
+
+-------------------------------------------   LEFT JOIN
+
+mysql> SELECT u.user_name AS Name, u.lang_id AS ID, l.lang_name AS Language FROM users u LEFT JOIN langs l ON u.lang_id = l.lang_id;
++---------------+------+------------+
+| Name          | ID   | Language   |
++---------------+------+------------+
+| Dana          |    1 | Python     |
+| Mohammed      |    2 | C++        |
+| Akram         |    6 | Java       |
+| Obada         |    1 | Python     |
+| Abd-Al-Rahman |    7 | C#         |
+| Ahmad         |    1 | Python     |
+| Noor          |    6 | Java       |
+| Lina          |    7 | C#         |
+| Sara          |    3 | Javascript |
+| Rana          |    2 | C++        |
+| Kareem        | NULL | NULL       |
++---------------+------+------------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT u.user_name AS Name, u.lang_id AS ID, l.lang_name AS Language FROM users u INNER JOIN langs l ON u.lang_id = l.lang_id;
++---------------+------+------------+
+| Name          | ID   | Language   |
++---------------+------+------------+
+| Dana          |    1 | Python     |
+| Mohammed      |    2 | C++        |
+| Akram         |    6 | Java       |
+| Obada         |    1 | Python     |
+| Abd-Al-Rahman |    7 | C#         |
+| Ahmad         |    1 | Python     |
+| Noor          |    6 | Java       |
+| Lina          |    7 | C#         |
+| Sara          |    3 | Javascript |
+| Rana          |    2 | C++        |
++---------------+------+------------+
+10 rows in set (0.00 sec)   
+
+
+
+------------------------------------------------ RIGHT JOIN
+
+
+
+mysql> SELECT u.user_name AS Name, u.lang_id AS ID, l.lang_name AS Language F
+ROM users u RIGHT JOIN langs l ON u.lang_id = l.lang_id;
++---------------+------+------------+
+| Name          | ID   | Language   |
++---------------+------+------------+
+| Dana          |    1 | Python     |
+| Obada         |    1 | Python     |
+| Ahmad         |    1 | Python     |
+| Mohammed      |    2 | C++        |
+| Rana          |    2 | C++        |
+| Sara          |    3 | Javascript |
+| NULL          | NULL | PHP        |
+| NULL          | NULL | Flutter    |
+| Akram         |    6 | Java       |
+| Noor          |    6 | Java       |
+| Abd-Al-Rahman |    7 | C#         |
+| Lina          |    7 | C#         |
++---------------+------+------------+
+12 rows in set (0.02 sec)
+
+
+
+
+=============================================== XXXXXXX 
+
+mysql> SELECT u.user_name AS Name, u.lang_id AS ID, l.lang_name AS Language, COUNT(l.lang_id) 
+FROM users u INNER JOIN langs l 
+ON u.lang_id = l.lang_id GROUP BY l.lang_id;
++---------------+------+------------+------------------+
+| Name          | ID   | Language   | COUNT(l.lang_id) |
++---------------+------+------------+------------------+
+| Dana          |    1 | Python     |
+  3 |
+| Mohammed      |    2 | C++        |
+  2 |
+| Sara          |    3 | Javascript |
+  1 |
+| Akram         |    6 | Java       |
+  2 |
+| Abd-Al-Rahman |    7 | C#         |
+  2 |
++---------------+------+------------+------------------+
+5 rows in set (0.00 sec)
+
+======================================================== VVVV
+
+mysql> SELECT l.lang_name AS Language, COUNT(l.lang_id) 
+FROM users u INNER JOIN langs l 
+ON u.lang_id = l.lang_id GROUP BY l.lang_id;
++------------+------------------+
+| Language   | COUNT(l.lang_id) |
++------------+------------------+
+| Python     |                3 |
+| C++        |                2 |
+| Javascript |                1 |
+| Java       |                2 |
+| C#         |                2 |
++------------+------------------+
+5 rows in set (0.00 sec)
+
+
+
+
+=============================== USING
+
+/*
+  The End
+*/
+
+SELECT
+  u.user_id,
+  u.user_name,
+  l.lang_name
+FROM
+  `users` u
+INNER JOIN
+  `langs` l
+USING
+  (lang_id);
+GROUP BY
+  l.lang_id
+
+
+
+EX:
+mysql>  SELECT l.lang_name AS Language, COUNT(l.lang_id) FROM users u INNER JOIN langs l USING(lang_id) GROUP BY l.lang_id;
++------------+------------------+
+| Language   | COUNT(l.lang_id) |
++------------+------------------+
+| Python     |                3 |
+| C++        |                2 |
+| Javascript |                1 |
+| Java       |                2 |
+| C#         |                2 |
++------------+------------------+
+5 rows in set (0.00 sec)

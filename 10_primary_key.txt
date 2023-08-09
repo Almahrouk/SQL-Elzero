@@ -1,0 +1,35 @@
+mysql> CREATE TABLE classes (
+    ->     cid int NOT NULL PRIMARY KEY,
+    ->     name varchar(255) UNIQUE
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE teachers (
+    ->     tid int NOT NULL,
+    ->     name varchar(255),
+    ->     PRIMARY KEY(tid)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> ALTER TABLE students ADD PRIMARY KEY(id);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> ALTER TABLE students DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE students ADD PRIMARY KEY(id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW INDEXES FROM students;
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table    | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| students |          0 | PRIMARY  |            1 | id          | A         |           0 |     NULL | NULL   |      | BTREE      |         |
+|
+| students |          0 | username |            1 | username    | A         |           0 |     NULL | NULL   |      | BTREE      |         |
+|
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+2 rows in set (0.00 sec)
+
+mysql>

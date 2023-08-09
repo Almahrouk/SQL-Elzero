@@ -1,0 +1,219 @@
+Video 46: Group By, Order By And Having
+
+
+
+/*
+  Group By, Order By And Having
+*/
+
+SELECT * FROM `contribution` ORDER BY `name`;
+
+SELECT * FROM `contribution` ORDER BY `name`, `points`;
+
+SELECT * FROM `contribution` GROUP BY `name`;
+
+SELECT name, points FROM `contribution` GROUP BY `name`;
+
+SELECT name, SUM(points) FROM `contribution` GROUP BY `name`;
+
+SELECT name, SUM(points) FROM `contribution` GROUP BY `name` ORDER BY points;
+
+SELECT name, SUM(points) FROM `contribution` GROUP BY `name` ORDER BY points DESC;
+
+SELECT status FROM `orders` ORDER BY status;
+
+SELECT status, COUNT(status) How_Much FROM `orders` GROUP BY status ORDER BY status;
+
+SELECT status, COUNT(status) How_Much FROM `orders` GROUP BY status HAVING How_Much > 1;
+
+
+
+
+
+
+EX:
+
+
+mysql> SELECT * FROM `contribution` ;
++----+----------+--------+
+| id | name     | points |
++----+----------+--------+
+|  0 | Mohammed |     50 |
+|  1 | Malik    |     70 |
+|  2 | Mohammed |    250 |
+|  3 | Dana     |     90 |
+|  4 | Mohammed |     60 |
+|  5 | Akram    |    100 |
+|  6 | Malik    |     30 |
+|  7 | Mohammed |     30 |
+|  8 | Dana     |    200 |
++----+----------+--------+
+9 rows in set (0.00 sec)
+
+==================================================   ORDER BY
+
+
+mysql> SELECT * FROM `contribution` ORDER BY `name`;
++----+----------+--------+
+| id | name     | points |
++----+----------+--------+
+|  5 | Akram    |    100 |
+|  3 | Dana     |     90 |
+|  8 | Dana     |    200 |
+|  1 | Malik    |     70 |
+|  6 | Malik    |     30 |
+|  0 | Mohammed |     50 |
+|  2 | Mohammed |    250 |
+|  4 | Mohammed |     60 |
+|  7 | Mohammed |     30 |
++----+----------+--------+
+9 rows in set (0.00 sec)
+
+
+
+mysql>  SELECT * FROM `contribution` ORDER BY `name`DESC;
++----+----------+--------+
+| id | name     | points |
++----+----------+--------+
+|  0 | Mohammed |     50 |
+|  2 | Mohammed |    250 |
+|  4 | Mohammed |     60 |
+|  7 | Mohammed |     30 |
+|  1 | Malik    |     70 |
+|  6 | Malik    |     30 |
+|  3 | Dana     |     90 |
+|  8 | Dana     |    200 |
+|  5 | Akram    |    100 |
++----+----------+--------+
+9 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM contribution ORDER BY name, points DESC;
++----+----------+--------+
+| id | name     | points |
++----+----------+--------+
+|  5 | Akram    |    100 |
+|  8 | Dana     |    200 |
+|  3 | Dana     |     90 |
+|  1 | Malik    |     70 |
+|  6 | Malik    |     30 |
+|  2 | Mohammed |    250 |
+|  4 | Mohammed |     60 |
+|  0 | Mohammed |     50 |
+|  7 | Mohammed |     30 |
++----+----------+--------+
+9 rows in set (0.00 sec)
+
+
+
+==================================================  GROUP BY
+
+
+mysql> SELECT * FROM contribution GROUP BY name;
++----+----------+--------+
+| id | name     | points |
++----+----------+--------+
+|  5 | Akram    |    100 |
+|  3 | Dana     |     90 |
+|  1 | Malik    |     70 |
+|  0 | Mohammed |     50 |
++----+----------+--------+
+4 rows in set (0.00 sec)
+
+
+------------------------ SUM 
+
+mysql> SELECT name, SUM(points) FROM `contribution` GROUP BY `name`;
++----------+-------------+
+| name     | SUM(points) |
++----------+-------------+
+| Akram    |         100 |
+| Dana     |         290 |
+| Malik    |         100 |
+| Mohammed |         390 |
++----------+-------------+
+4 rows in set (0.00 sec)
+
+
+======================================  GROUP BY & SUM()
+
+
+mysql> SELECT name, SUM(points) FROM `contribution` GROUP BY `name` ORDER BY SUM(points) DESC;
++----------+-------------+
+| name     | SUM(points) |
++----------+-------------+
+| Mohammed |         390 |
+| Dana     |         290 |
+| Malik    |         100 |
+| Akram    |         100 |
++----------+-------------+
+4 rows in set (0.00 sec)
+
+
+
+======================================  GROUP BY & COUNT()
+
+
+mysql> SELECT  name, COUNT(name) AS How_Much FROM contribution GROUP BY name;
++----------+----------+
+| name     | How_Much |
++----------+----------+
+| Akram    |        1 |
+| Dana     |        2 |
+| Malik    |        2 |
+| Mohammed |        4 |
++----------+----------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+mysql> SELECT  name, COUNT(name) AS How_Much FROM contribution GROUP BY name ORDER BY How_Much DESC;
++----------+----------+
+| name     | How_Much |
++----------+----------+
+| Mohammed |        4 |
+| Malik    |        2 |
+| Dana     |        2 |
+| Akram    |        1 |
++----------+----------+
+4 rows in set (0.00 sec)
+=========================================
+
+
+
+
+mysql> SELECT
+    -> name,
+    -> COUNT(name) AS How_Much
+    -> FROM
+    -> contribution
+    -> GROUP BY
+    -> name
+    -> HAVING
+    -> How_Much > 1
+    -> ;
++----------+----------+
+| name     | How_Much |
++----------+----------+
+| Dana     |        2 |
+| Malik    |        2 |
+| Mohammed |        4 |
++----------+----------+
+3 rows in set (0.03 sec)
+
+OR 
+
+SELECT  
+	name, 
+    COUNT(name) AS How_Much 
+FROM 
+	contribution 
+GROUP BY 
+	name 
+HAVING 
+	How_Much > 1
+ORDER BY 
+	How_Much DESC    
+    ;

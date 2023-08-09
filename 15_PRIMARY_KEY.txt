@@ -1,0 +1,21 @@
+/* Create Table classes With Two Fields */
+CREATE TABLE classes (
+    cid int NOT NULL PRIMARY KEY,
+    name varchar(255) UNIQUE
+);
+
+/* Create Table teachers With 3 Fields */
+CREATE TABLE teachers (
+    tid int NOT NULL,
+    name varchar(255),
+    PRIMARY KEY(tid)
+);
+
+/* Make students id field Primary Key */
+ALTER TABLE students ADD PRIMARY KEY(id);
+
+/* Drop Primary Key From students Table */
+ALTER TABLE students DROP PRIMARY KEY;
+
+/* Get Table Indexs */
+SHOW INDEXES FROM students;

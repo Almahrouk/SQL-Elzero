@@ -1,0 +1,471 @@
+from 22 to 29
+
+
+
+
+=======================================
+==== MYSQL String Functions Syntax ====
+=======================================
+
+
+======================================================================================================
+
++--------------------------------+
+| LEFT(String, Length)           |  (1)
++--------------------------------+
+| MID(String, Position, Length)  |  (2)
++--------------------------------+
+| RIGHT(String, Length)          |  (3)
++--------------------------------+
+
+
+
+
+=======================================================================================================
+
++----------------------+
+| LENGTH(String)       |  (1)
++----------------------+
+| CHAR_LENGTH(String)  |  (2)
++----------------------+
+
+Ex:
+
+mysql> SELECT comment, CHAR_LENGTH(comment) FROM `comments` ORDER BY CHAR_LENGTH(comment) ASC;
++-----------+----------------------+
+| comment   | CHAR_LENGTH(comment) |
++-----------+----------------------+
+| Thanks    |                    6 |
+| Excellent |                    9 |
+| Very well |                    9 |
++-----------+----------------------+
+3 rows in set (0.01 sec)
+
+mysql>
+
+
+
+================================================================================================================
+
++--------------------------------+
+| LCASE(String) = LOWER(String)  |  (1)
++--------------------------------+
+| UCASE(String) = upper(String)  |  (2)
++--------------------------------+
+
+Ex:
+mysql> SELECT comment, UCASE(comment) FROM `comments`;
++-----------+----------------+
+| comment   | UCASE(comment) |
++-----------+----------------+
+| Thanks    | THANKS         |
+| Excellent | EXCELLENT      |
+| Very well | VERY WELL      |
++-----------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT comment, LCASE(comment) FROM `comments`;
++-----------+----------------+
+| comment   | LCASE(comment) |
++-----------+----------------+
+| Thanks    | thanks         |
+| Excellent | excellent      |
+| Very well | very well      |
++-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+/*
+  Left => LEFT(String, Length)
+  text => Field Name
+*/
+
+SELECT LEFT(text, 3) FROM `try`; // select first 3 letter from the left of the database text from table try
+
+/*
+  Mid => MID(String, Position, Length)
+  text => Field Name
+*/
+
+SELECT MID(text, 2, 3) FROM `try`;
+
+/*
+  Right => RIGHT(String, Length)
+  text => Field Name
+*/
+
+SELECT RIGHT(text, 3) FROM `try`;
+
+
+
+--------------------- some function:
+
+SELECT comment, length(comment) FROM `comments`;
+
+mysql>  SELECT * FROM comments;
++------+-----------+-----------+
+| c_id | comment   | client_id |
++------+-----------+-----------+
+|    1 | Thanks    |         0 |
+|    2 | Excellent |         0 |
+|    3 | Very well |         0 |
++------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT comment, length(comment) FROM `comments`;
++-----------+-----------------+
+| comment   | length(comment) |
++-----------+-----------------+
+| Thanks    |               6 |
+| Excellent |               9 |
+| Very well |               9 |
++-----------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+======================================================================================================
+
++--------------------------------+
+| REPEAT(String, # OF Reapeats)  |  (1)
++--------------------------------+
+| REPLACE(String, From, To)      |  (2)
++--------------------------------+
+| REVERSE(String)                |  (3)
++--------------------------------+
+
+
+
+Ex:
+
+mysql> SELECT comment, REPEAT(comment, 3) AS REPEATED FROM `comments`;
++-----------+-----------------------------+
+| comment   | REPEATED                    |
++-----------+-----------------------------+
+| Thanks    | ThanksThanksThanks          |
+| Excellent | ExcellentExcellentExcellent |
+| Very well | Very wellVery wellVery well |
++-----------+-----------------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
+
+======================================================================================================
+======================================================================================================
+
++-----------------------------------------------+
+| INSERT(String, Position, Length, New String)  |  (1)
++-----------------------------------------------+
+
+
+Ex:
+
+mysql> SELECT  comment, INSERT(comment, 3, 2, ' @123@ ') AS INSERT_1 FROM  comments;
++-----------+----------------+
+| comment   | INSERT_1       |
++-----------+----------------+
+| Thanks    | Th @123@ ks    |
+| Excellent | Ex @123@ llent |
+| Very well | Ve @123@  well |
++-----------+----------------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+mysql> UPDATE `comments` SET comment = INSERT(comment, 4, 2, 'WELCOME');
+
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SELECT * FROM comments;
++------+----------------+-----------+
+| c_id | comment        | client_id |
++------+----------------+-----------+
+|    1 | ThaWELCOMEs    |         0 |
+|    2 | ExcWELCOMElent |         0 |
+|    3 | VerWELCOMEwell |         0 |
++------+----------------+-----------+
+3 rows in set (0.00 sec)
+
+
+............................
+USE WHERE :
+mysql>  SELECT * FROM comments;
++------+---------+-----------+
+| c_id | comment | client_id |
++------+---------+-----------+
+|    1 | WELCOME |         0 |
+|    2 | WELCOME |         0 |
+|    3 | WELCOME |         0 |
++------+---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE `comments` SET comment = INSERT(comment, 1, 15, 'ABCA AERT QWW') WHERE c_id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM comments;
++------+---------------+-----------+
+| c_id | comment       | client_id |
++------+---------------+-----------+
+|    1 | ABCA AERT QWW |         0 |
+|    2 | WELCOME       |         0 |
+|    3 | WELCOME       |         0 |
++------+---------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE `comments` SET comment = INSERT(comment, 1, 15, 'KDAAEECK WODA') WHERE c_id=2;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE `comments` SET comment = INSERT(comment, 1, 15, 'OBADA SALAME') WHERE c_id=3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM comments;
++------+---------------+-----------+
+| c_id | comment       | client_id |
++------+---------------+-----------+
+|    1 | ABCA AERT QWW |         0 |
+|    2 | KDAAEECK WODA |         0 |
+|    3 | OBADA SALAME  |         0 |
++------+---------------+-----------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+USE INSERT INTO :
+
+mysql> INSERT INTO `comments` (`c_id`, `comment`, `client_id`) VALUES ('5', '      MUHANAD   ',
+ '0');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  SELECT * FROM comments;
++------+------------------+-----------+
+| c_id | comment          | client_id |
++------+------------------+-----------+
+|    1 | ABCA AERT QWW    |         0 |
+|    2 | KDAAEECK WODA    |         0 |
+|    3 | OBADA SALAME     |         0 |
+|    4 |       DANIA      |         2 |
+|    5 |       MUHANAD    |         0 |
++------+------------------+-----------+
+5 rows in set (0.00 sec)
+
+
+======================================================================================================
+
++---------------------------------------------------------------------------+
+| TRIM( Methods[Leading | Trailing | Both]  [Remove String] FROM [String])  |  (1)
++---------------------------------------------------------------------------+
+ 	- Methods Optional If Not Written Both Will Be Used 
+	- Remove String If Not Written Space Will Be Removed
+
+
+Ex:   NO_SPACE
+
+mysql> SELECT comment, TRIM(comment) AS NO_SPACE FROM comments;
++------------------+---------------+
+| comment          | NO_SPACE      |
++------------------+---------------+
+| ABCA AERT QWW    | ABCA AERT QWW |
+| KDAAEECK WODA    | KDAAEECK WODA |
+| OBADA SALAME     | OBADA SALAME  |
+|       DANIA      | DANIA         |
+|       MUHANAD    | MUHANAD       |
++------------------+---------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT comment, TRIM(LEADING FROM comment) AS NO_SPACE_LEADING FROM comments;
++------------------+------------------+
+| comment          | NO_SPACE_LEADING |
++------------------+------------------+
+| ABCA AERT QWW    | ABCA AERT QWW    |
+| KDAAEECK WODA    | KDAAEECK WODA    |
+| OBADA SALAME     | OBADA SALAME     |
+|       DANIA      | DANIA            |
+|       MUHANAD    | MUHANAD          |
++------------------+------------------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> SELECT comment, TRIM(TRAILING FROM comment) AS NO_SPACE_LEADING FROM comments;
++------------------+------------------+
+| comment          | NO_SPACE_LEADING |
++------------------+------------------+
+| ABCA AERT QWW    | ABCA AERT QWW    |
+| KDAAEECK WODA    | KDAAEECK WODA    |
+| OBADA SALAME     | OBADA SALAME     |
+|       DANIA      |       DANIA      |
+|       MUHANAD    |       MUHANAD    |
++------------------+------------------+
+5 rows in set (0.00 sec)
+
+
+
+
+mysql> SELECT comment, TRIM(BOTH FROM comment) AS NO_SPACE, CHAR_LENGTH(TRIM(BOTH FROM comment))
+AS NUM_OF_SPACE_TRIM FROM `comments`;
++------------------+---------------+-------------------+
+| comment          | NO_SPACE      | NUM_OF_SPACE_TRIM |
++------------------+---------------+-------------------+
+| ABCA AERT QWW    | ABCA AERT QWW |                13 |
+| KDAAEECK WODA    | KDAAEECK WODA |                13 |
+| OBADA SALAME     | OBADA SALAME  |                12 |
+|       DANIA      | DANIA         |                 5 |
+|       MUHANAD    | MUHANAD       |                 7 |
++------------------+---------------+-------------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+mysql> SELECT comment, TRIM(BOTH FROM comment) AS NO_SPACE, CHAR_LENGTH(TRIM(BOTH FROM comment))
+    -> AS NUM_OF_SPACE_TRIM , CHAR_LENGTH(comment) AS NUM_OF_CHRT_WITHOUT_TRIN FROM `comments`;
++------------------+---------------+-------------------+--------------------------+
+| comment          | NO_SPACE      | NUM_OF_SPACE_TRIM | NUM_OF_CHRT_WITHOUT_TRIN |
++------------------+---------------+-------------------+--------------------------+
+| ABCA AERT QWW    | ABCA AERT QWW |                13 |                       13 |
+| KDAAEECK WODA    | KDAAEECK WODA |                13 |                       13 |
+| OBADA SALAME     | OBADA SALAME  |                12 |                       12 |
+|       DANIA      | DANIA         |                 5 |                       14 |
+|       MUHANAD    | MUHANAD       |                 7 |                       16 |
++------------------+---------------+-------------------+--------------------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+mysql> SELECT comment, TRIM(LEADING '@' FROM comment ) AS leading_1 FROM comments WHERE c_id = 6 ;
++------------------+--------------+
+| comment          | leading_1    |
++------------------+--------------+
+| @@@@DANIIISS@@@@ | DANIIISS@@@@ |
++------------------+--------------+
+1 row in set (0.00 sec)
+
+
+
+mysql> SELECT comment, TRIM(BOTH '@' FROM comment ) AS TRIM_1 FROM comments WHERE c_id = 6 ;
++------------------+----------+
+| comment          | TRIM_1   |
++------------------+----------+
+| @@@@DANIIISS@@@@ | DANIIISS |
++------------------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+======================================================================================================
+
++-------------------------------------+
+| LPAD(String, Length, PaddedString)  |  (1)
++-------------------------------------+
+| RPAD(String, Length, PaddedString)  |  (2)
++-------------------------------------+
+
+Ex:
+
+mysql> SELECT  comment AS MainText, LPAD( comment, 3, '') AS
+TextWithPadded FROM  comments;
++------------------+----------------+
+| MainText         | TextWithPadded |
++------------------+----------------+
+| ABCA AERT QWW    | ABC            |
+| KDAAEECK WODA    | KDA            |
+| OBADA SALAME     | OBA            |
+|       DANIA      |                |
+|       MUHANAD    |                |
+| @@@@DANIIISS@@@@ | @@@            |
++------------------+----------------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+mysql> SELECT  comment AS MainText, LPAD( comment, 5, '') AS TextWithPadded FROM  comments WHERE c_id=7;
++----------+----------------+
+| MainText | TextWithPadded |
++----------+----------------+
+| os       | NULL           |
++----------+----------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+mysql>  SELECT  comment AS MainText, LPAD( comment, 5, '@') AS TextWithPadded FROM  comments ;
++------------------+----------------+
+| MainText         | TextWithPadded |
++------------------+----------------+
+| ABCA AERT QWW    | ABCA           |
+| KDAAEECK WODA    | KDAAE          |
+| OBADA SALAME     | OBADA          |
+|       DANIA      |                |
+|       MUHANAD    |                |
+| @@@@DANIIISS@@@@ | @@@@D          |
+| os               | @@@os          |
+| mah              | @@mah          |
++------------------+----------------+
+8 rows in set (0.00 sec)
+
+
+
+
+
+mysql> SELECT  comment AS MainText, RPAD( comment, 5, '@') AS TextWithPadded FROM  comments ;
++------------------+----------------+
+| MainText         | TextWithPadded |
++------------------+----------------+
+| ABCA AERT QWW    | ABCA           |
+| KDAAEECK WODA    | KDAAE          |
+| OBADA SALAME     | OBADA          |
+|       DANIA      |                |
+|       MUHANAD    |                |
+| @@@@DANIIISS@@@@ | @@@@D          |
+| os               | os@@@          |
+| mah              | mah@@          |
++------------------+----------------+
+8 rows in set (0.00 sec)
+
+

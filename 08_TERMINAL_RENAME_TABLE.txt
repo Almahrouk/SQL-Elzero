@@ -1,0 +1,91 @@
+Change the table name and type and change the storage system
+
+ON Terminal:
+
+
+
+C:\Users\almah>mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 144
+Server version: 5.5.5-10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| elzero             |
+| information_schema |
+| management         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| product            |
+| test               |
+| test00             |
+| test1              |
+| using_sql          |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> USE elzero;
+Database changed
+mysql> SHOW TABLE STATUS;
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| Name     | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation          | Checksum | Create_options | Comment | Max_index_length | Temporary |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| students | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |           NULL | 2023-01-04 16:29:19 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SHOW TABLE STATUS;
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| Name     | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation          | Checksum | Create_options | Comment | Max_index_length | Temporary |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| s1       | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |           NULL | 2023-01-04 16:45:09 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
+| s2       | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |           NULL | 2023-01-04 16:45:35 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
+| students | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |           NULL | 2023-01-04 16:29:19 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> RENAME TABLE S1 TO new1, S2 TO new2;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>  SHOW TABLE STATUS;
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| Name     | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation          | Checksum | Create_options | Comment | Max_index_length | Temporary |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| new1     | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |
+  NULL | 2023-01-04 16:45:09 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
+| new2     | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |
+  NULL | 2023-01-04 16:45:35 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
+| students | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |               0 |            0 |         0 |
+  NULL | 2023-01-04 16:29:19 | NULL        | NULL       | utf8mb4_general_ci |     NULL |                |         |                0 | N         |
++----------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE new1 ENGINE = MYISAM;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  SHOW TABLE STATUS;
++----------+--------+---------+------------+------+----------------+-------------+------------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| Name     | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length  | Index_length | Data_free | Auto_increment | Create_time         | Update_time         | Check_time | Collation          | Checksum | Create_options | Comment | Max_index_length | Temporary |
++----------+--------+---------+------------+------+----------------+-------------+------------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+| new1     | MyISAM |      10 | Fixed      |    0 |              0 |           0 | 1970324836974591 |         1024 |         0 |           NULL | 2023-01-04 16:50:19 | 2023-01-04 16:50:19 | NULL       | utf8mb4_general_ci |     NULL |                |         |      17179868160 | N         |
+| new2     | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |                0 |            0 |         0 |           NULL | 2023-01-04 16:45:35 | NULL                | NULL       | utf8mb4_general_ci |     NULL |                |         |
+     0 | N         |
+| students | InnoDB |      10 | Dynamic    |    0 |              0 |       16384 |                0 |            0 |         0 |           NULL | 2023-01-04 16:29:19 | NULL                | NULL       | utf8mb4_general_ci |     NULL |                |         |
+     0 | N         |
++----------+--------+---------+------------+------+----------------+-------------+------------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql>

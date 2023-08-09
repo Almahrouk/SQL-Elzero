@@ -1,0 +1,135 @@
+======================================
+======================================
+Control Flow Function 
+
+IF (Condition, True, False)
+
+
+
+
+CASE 
+	WHEN Expression_1 = Value_1 THEN Result_1
+	WHEN Expression_2 = Value_2 THEN Result_2
+	WHEN Expression_3 = Value_3 THEN Result_3
+	...
+	ELSE Result
+END AS ...
+
+
+CASE Expression
+	WHEN Value_1 THEN Result_1
+	WHEN Value_2 THEN Result_2
+	WHEN Value_3 THEN Result_3
+	...
+	ELSE Result
+END AS ...
+
+
+
+
+
+---------------------------------- Code
+
+
+mysql> SELECT  id,username,number FROM  clients;
++----+----------+--------+
+| id | username | number |
++----+----------+--------+
+|  0 | mohammed |      2 |
+|  1 | salim    |      1 |
+|  2 | obada    |      0 |
+|  3 | wejdan   |      7 |
+|  4 | amani    |      5 |
+|  5 | obadz    |     21 |
+|  6 | Osama    |      1 |
+|  8 | ahmad    |      2 |
+| 10 | Gamal    |      4 |
+| 11 | Sameh    |      4 |
+| 13 | Kamal    |      9 |
+| 14 | Zero     |     31 |
++----+----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT  id,username,number, IF (number >= 5, 'Hard Luck', 'congrats') AS Result FROM c
+lients;
++----+----------+--------+-----------+
+| id | username | number | Result    |
++----+----------+--------+-----------+
+|  0 | mohammed |      2 | congrats  |
+|  1 | salim    |      1 | congrats  |
+|  2 | obada    |      0 | congrats  |
+|  3 | wejdan   |      7 | Hard Luck |
+|  4 | amani    |      5 | Hard Luck |
+|  5 | obadz    |     21 | Hard Luck |
+|  6 | Osama    |      1 | congrats  |
+|  8 | ahmad    |      2 | congrats  |
+| 10 | Gamal    |      4 | congrats  |
+| 11 | Sameh    |      4 | congrats  |
+| 13 | Kamal    |      9 | Hard Luck |
+| 14 | Zero     |     31 | Hard Luck |
++----+----------+--------+-----------+
+12 rows in set (0.00 sec)
+
+
+
+
+
+USE CONCAT:
+
+
+
+mysql> SELECT  id,username,IF (number >= 5, CONCAT('Hard Luck ', number), CONCAT('congrats ', number)) AS Result FROM clients;
++----+----------+--------------+
+| id | username | Result       |
++----+----------+--------------+
+|  0 | mohammed | congrats 2   |
+|  1 | salim    | congrats 1   |
+|  2 | obada    | congrats 0   |
+|  3 | wejdan   | Hard Luck 7  |
+|  4 | amani    | Hard Luck 5  |
+|  5 | obadz    | Hard Luck 21 |
+|  6 | Osama    | congrats 1   |
+|  8 | ahmad    | congrats 2   |
+| 10 | Gamal    | congrats 4   |
+| 11 | Sameh    | congrats 4   |
+| 13 | Kamal    | Hard Luck 9  |
+| 14 | Zero     | Hard Luck 31 |
++----+----------+--------------+
+12 rows in set (0.00 sec)
+
+
+
+
+
+
+USE UPDATE :
+
+
+mysql> UPDATE clients SET number = IF ( number < 1 , number + 10 , number);
+
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 12  Changed: 1  Warnings: 0
+
+mysql> SELECT  id, username, number FROM clients;
++----+----------+--------+
+| id | username | number |
++----+----------+--------+
+|  0 | mohammed |      2 |
+|  1 | salim    |      1 |
+|  2 | obada    |     10 |
+|  3 | wejdan   |      7 |
+|  4 | amani    |      5 |
+|  5 | obadz    |     21 |
+|  6 | Osama    |      1 |
+|  8 | ahmad    |      2 |
+| 10 | Gamal    |      4 |
+| 11 | Sameh    |      4 |
+| 13 | Kamal    |      9 |
+| 14 | Zero     |     31 |
++----+----------+--------+
+12 rows in set (0.00 sec) 
+
+
+
+
+ UPDATE clients SET email = IF ( email IS NULL , 'N/A' , email);

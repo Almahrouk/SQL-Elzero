@@ -1,0 +1,328 @@
+Comparision Functions Syntax
+
+BETWEEN AND
+
+NOT BETWEEN AND
+----------------
+
+BETWEEN Expr AND Expr
+
+Minimum <= Expr AND Expr <= Maximum
+
+--------------------------------------------
+
+
+BETWEEN DATE_SUB(CURDATE(), INTERVAL 2 MONTH) AND '2023-01-06'
+
+BETWEEN '2023-01-01' AND '2023-01-30'
+
+WHERE date 
+BETWEEN DATE_SUB(CURDATE(), INTERVAL 10 DAY) 
+AND CURDATE() >> المقالات اخر عشر ايام
+
+
+
+--------------------------------------------
+--------------------------------------------
+--------------------------------------------
+
+IN (Values)
+
+NOT IN (Values) 
+
+
+--------------------------------------------
+
+SELECT * FROM `try` WHERE number IN (4, 5, 8);
+
+SELECT * FROM `try` WHERE number IN (4, 5, 8, 'Osama', 100);
+
+SELECT * FROM `try` WHERE date IN ('2016-05-25', '2016-05-18');
+
+
+
+SELECT * FROM `try` WHERE number NOT IN (3, 7);
+
+SELECT * FROM `try` WHERE date NOT IN ('2016-07-16');
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------
+--------------------------------------------
+--------------------------------------------
+
+
+LIKE 
+ % (Empty Or Collection Of Characters)
+ _ (One Character)
+
+NOT LIKE 
+
+
+
+
+
+
+
+
+
+
+
+mysql> USE elzero
+Database changed
+mysql> SELECT * FROM clients;
++----+----------+---------------+------------+--------+
+| id | username | email         | date       | number |
++----+----------+---------------+------------+--------+
+|  0 | mohammed | o@o.gmail.com | 2016-09-15 |      2 |
+|  1 | salim    | sa@ieee.com   | 2020-01-06 |      1 |
+|  2 | obada    | ob@yahoo.com  | 2023-01-06 |      0 |
+|  3 | wejdan   | waj@yahoo.com | 2012-08-28 |      7 |
+|  4 | amani    | ee23@aws.com  | 2023-01-31 |      5 |
+|  6 | Osama    | O@o.com       | 2023-01-06 |      1 |
+|  8 | ahmad    | NULL          | 2023-01-06 |      2 |
+| 10 | Gamal    | NULL          | 2023-01-06 |      4 |
+| 11 | Sameh    | NULL          | 2023-01-06 |      4 |
+| 13 | Kamal    | NULL          | 2023-01-06 |      9 |
+| 14 | Zero     | NULL          | 2023-01-06 |     31 |
++----+----------+---------------+------------+--------+
+11 rows in set (0.02 sec)
+
+mysql> SELECT * FROM clients WHERE username LIKE '%ama';
++----+----------+---------+------------+--------+
+| id | username | email   | date       | number |
++----+----------+---------+------------+--------+
+|  6 | Osama    | O@o.com | 2023-01-06 |      1 |
++----+----------+---------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT * FROM clients WHERE username LIKE '%ama%';
++----+----------+--------------+------------+--------+
+| id | username | email        | date       | number |
++----+----------+--------------+------------+--------+
+|  4 | amani    | ee23@aws.com | 2023-01-31 |      5 |
+|  6 | Osama    | O@o.com      | 2023-01-06 |      1 |
+| 10 | Gamal    | NULL         | 2023-01-06 |      4 |
+| 13 | Kamal    | NULL         | 2023-01-06 |      9 |
++----+----------+--------------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM clients WHERE username LIKE 'a%';
++----+----------+--------------+------------+--------+
+| id | username | email        | date       | number |
++----+----------+--------------+------------+--------+
+|  8 | ahmad    | NULL         | 2023-01-06 |      2 |
+|  4 | amani    | ee23@aws.com | 2023-01-31 |      5 |
++----+----------+--------------+------------+--------+
+2 rows in set (0.03 sec)
+
+mysql>  SELECT * FROM clients WHERE username LIKE 'o%a';
++----+----------+--------------+------------+--------+
+| id | username | email        | date       | number |
++----+----------+--------------+------------+--------+
+|  2 | obada    | ob@yahoo.com | 2023-01-06 |      0 |
+|  6 | Osama    | O@o.com      | 2023-01-06 |      1 |
++----+----------+--------------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM clients WHERE username LIKE '%a%a%';
++----+----------+--------------+------------+--------+
+| id | username | email        | date       | number |
++----+----------+--------------+------------+--------+
+|  2 | obada    | ob@yahoo.com | 2023-01-06 |      0 |
+|  4 | amani    | ee23@aws.com | 2023-01-31 |      5 |
+|  6 | Osama    | O@o.com      | 2023-01-06 |      1 |
+|  8 | ahmad    | NULL         | 2023-01-06 |      2 |
+| 10 | Gamal    | NULL         | 2023-01-06 |      4 |
+| 13 | Kamal    | NULL         | 2023-01-06 |      9 |
++----+----------+--------------+------------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+mysql> SELECT * FROM clients WHERE username LIKE '_ama_';
++----+----------+-------+------------+--------+
+| id | username | email | date       | number |
++----+----------+-------+------------+--------+
+| 10 | Gamal    | NULL  | 2023-01-06 |      4 |
+| 13 | Kamal    | NULL  | 2023-01-06 |      9 |
++----+----------+-------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients WHERE username LIKE '__ama%';
++----+----------+---------+------------+--------+
+| id | username | email   | date       | number |
++----+----------+---------+------------+--------+
+|  6 | Osama    | O@o.com | 2023-01-06 |      1 |
++----+----------+---------+------------+--------+
+1 row in set (0.00 sec)
+
+
+mysql>  SELECT * FROM clients WHERE username LIKE 'obad_';
++----+----------+--------------+------------+--------+
+| id | username | email        | date       | number |
++----+----------+--------------+------------+--------+
+|  2 | obada    | ob@yahoo.com | 2023-01-06 |      0 |
+|  5 | obadz    | ob@yah.com   | 2023-01-06 |     21 |
++----+----------+--------------+------------+--------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+mysql> SELECT * FROM clients WHERE username LIKE '%';
++----+----------+---------------+------------+--------+
+| id | username | email         | date       | number |
++----+----------+---------------+------------+--------+
+|  0 | mohammed | o@o.gmail.com | 2016-09-15 |      2 |
+|  1 | salim    | sa@ieee.com   | 2020-01-06 |      1 |
+|  2 | obada    | ob@yahoo.com  | 2023-01-06 |      0 |
+|  3 | wejdan   | waj@yahoo.com | 2012-08-28 |      7 |
+|  4 | amani    | ee23@aws.com  | 2023-01-31 |      5 |
+|  5 | obadz    | ob@yah.com    | 2023-01-06 |     21 |
+|  6 | Osama    | O@o.com       | 2023-01-06 |      1 |
+|  8 | ahmad    | NULL          | 2023-01-06 |      2 |
+| 10 | Gamal    | NULL          | 2023-01-06 |      4 |
+| 11 | Sameh    | NULL          | 2023-01-06 |      4 |
+| 13 | Kamal    | NULL          | 2023-01-06 |      9 |
+| 14 | Zero     | NULL          | 2023-01-06 |     31 |
++----+----------+---------------+------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM clients WHERE username LIKE '%______%';
++----+----------+---------------+------------+--------+
+| id | username | email         | date       | number |
++----+----------+---------------+------------+--------+
+|  0 | mohammed | o@o.gmail.com | 2016-09-15 |      2 |
+|  3 | wejdan   | waj@yahoo.com | 2012-08-28 |      7 |
++----+----------+---------------+------------+--------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+======================================
+======================================
+Comparison Operators
+
+WHERE 
+- =  , !=
+- <  , >
+- <= , >=
+- 
+
+
+
+EX:
+
+mysql> SELECT  number FROM clients ;
++--------+
+| number |
++--------+
+|      2 |
+|      1 |
+|      0 |
+|      7 |
+|      5 |
+|     21 |
+|      1 |
+|      2 |
+|      4 |
+|      4 |
+|      9 |
+|     31 |
++--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT  username,number FROM clients WHERE number <= 4;
++----------+--------+
+| username | number |
++----------+--------+
+| mohammed |      2 |
+| salim    |      1 |
+| obada    |      0 |
+| Osama    |      1 |
+| ahmad    |      2 |
+| Gamal    |      4 |
+| Sameh    |      4 |
++----------+--------+
+7 rows in set (0.00 sec)
+
+
+mysql>  SELECT  username,number FROM clients WHERE number = 1;
++----------+--------+
+| username | number |
++----------+--------+
+| salim    |      1 |
+| Osama    |      1 |
++----------+--------+
+2 rows in set (0.00 sec)
+
+
+
+mysql>  SELECT  username,number FROM clients WHERE number != 1;
++----------+--------+
+| username | number |
++----------+--------+
+| mohammed |      2 |
+| obada    |      0 |
+| wejdan   |      7 |
+| amani    |      5 |
+| obadz    |     21 |
+| ahmad    |      2 |
+| Gamal    |      4 |
+| Sameh    |      4 |
+| Kamal    |      9 |
+| Zero     |     31 |
++----------+--------+
+10 rows in set (0.00 sec)
+
+
+
+
+======================================
+======================================
+Logical Operators
+
+AND && [Condition + Condition]
+NOT !  [Condition]
+OR  || [Condition OR Condition]
+
+XOR [Condition AND NOT Condition]
+    [NOT Condition AND Condition]
+
+
+EX:
+
+
+mysql>  SELECT  username,number FROM clients WHERE number = 1 OR username LIKE '%AMA%';
++----------+--------+
+| username | number |
++----------+--------+
+| salim    |      1 |
+| amani    |      5 |
+| Osama    |      1 |
+| Gamal    |      4 |
+| Kamal    |      9 |
++----------+--------+
+5 rows in set (0.00 sec)
+
+
+

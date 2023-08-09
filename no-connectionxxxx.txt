@@ -1,0 +1,4 @@
+default-character-set=utf8mb4 >>>> xxxx
+
+
+skip-grant-tables >>> vvvv

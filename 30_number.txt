@@ -1,0 +1,93 @@
+MySQL Numeric Functions Syntax:
+
+CEIL(Number) >>>> up , 3.5 > 4    &    1.1 > 2
+FLOOR(Number) >>>> down , 3.5 > 3     &     3.9 > 3
+ROUND(Number, Decimal) 
+
+
+Ex:
+
+
+mysql> SELECT Double1 AS Main_Num, CEIL(Double1) AS Ceil_UP FROM teachers ;
++----------+---------+
+| Main_Num | Ceil_UP |
++----------+---------+
+|      1.2 |       2 |
+|     1.45 |       2 |
+|     1.72 |       2 |
+|     1.55 |       2 |
+|  1.53811 |       2 |
++----------+---------+
+5 rows in set (0.00 sec)
+
+
+mysql>  SELECT Double1 AS Main_Num, FLOOR(Double1) AS Floor_DOWN FROM teachers ;
++----------+------------+
+| Main_Num | Floor_DOWN |
++----------+------------+
+|      1.2 |          1 |
+|     1.45 |          1 |
+|     1.72 |          1 |
+|     1.55 |          1 |
+|  1.53811 |          1 |
++----------+------------+
+5 rows in set (0.00 sec)
+
+
+----------------------
+
+mysql>  SELECT Double1 AS Main_Num, ROUND(Double1, 1) AS Round_1 FROM teachers ;
++----------+---------+
+| Main_Num | Round_1 |
++----------+---------+
+|      1.2 |     1.2 |
+|     1.45 |     1.4 |
+|     1.72 |     1.7 |
+|     1.55 |     1.6 |
+|  1.53811 |     1.5 |
++----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Double1 AS Main_Num, ROUND(Double1, 0) AS Round_1 FROM teachers ;
++----------+---------+
+| Main_Num | Round_1 |
++----------+---------+
+|      1.2 |       1 |
+|     1.45 |       1 |
+|     1.72 |       2 |
+|     1.55 |       2 |
+|  1.53811 |       2 |
++----------+---------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+Elzero Code:
+/*
+  Ceil => CEIL(Number)
+  number => Field Name
+*/
+
+SELECT number AS MainNumber, CEIL(number) AS newNumber FROM `try`;
+
+/*
+  Floor => FLOOR(Number)
+  number => Field Name
+*/
+
+SELECT number AS MainNumber, FLOOR(number) AS newNumber FROM `try`;
+
+/*
+  Round => ROUND(Number, Decimal)
+  number => Field Name
+*/
+
+SELECT number AS MainNumber, ROUND(number) AS newNumber FROM `try`;
+
+SELECT number AS MainNumber, ROUND(number, 2) AS newNumber FROM `try`;
+
